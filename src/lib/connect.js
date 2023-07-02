@@ -18,7 +18,7 @@ export async function connectWallet() {
     });
 
     listener.on("connect", (error, payload) => {
-        console.log("connected!")
+        console.log("connected!!")
         if (error) {
             throw error;
         }
@@ -26,6 +26,5 @@ export async function connectWallet() {
 
     listener.on("disconnect", (code, reason) => {
         console.log(code, reason);
-        signer.set(null);
     });
 }
