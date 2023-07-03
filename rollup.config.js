@@ -49,7 +49,7 @@ function serve() {
 export default {
   input: "src/main.js",
   output: {
-    sourcemap: !production,
+    sourcemap: true,
     format: "iife",
     name: "app",
     file: "build/bundle." + hash + ".js",
@@ -58,6 +58,7 @@ export default {
   plugins: [
     svelteSVG({
       svgo: {},
+      exclude: 'node_modules/@lifi/wallet-management/walletIcons/*.svg',
     }),
 
     svelte({
@@ -67,13 +68,13 @@ export default {
       },
     }),
 
-    production && gzipPlugin(),
-    production &&
-      gzipPlugin({
-        customCompression: (content) =>
-          brotliCompressSync(Buffer.from(content)),
-        fileName: ".br",
-      }),
+    // production && gzipPlugin(),
+    // production &&
+    //   gzipPlugin({
+    //     customCompression: (content) =>
+    //       brotliCompressSync(Buffer.from(content)),
+    //     fileName: ".br",
+    //   }),
 
     // we'll extract any component CSS out into
     // a separate file - better for performance
@@ -126,7 +127,7 @@ export default {
   watch: {
     clearScreen: false,
     chokidar: {
-      usePolling: true,
+      usePolling: false,
     },
   },
 };
