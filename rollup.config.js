@@ -16,6 +16,7 @@ import ChildProcess from "child_process";
 
 configDotenv();
 
+const port = 80;
 const production = !process.env.ROLLUP_WATCH;
 const hash = String(
   ChildProcess.execSync("git rev-parse --short HEAD")
@@ -114,7 +115,7 @@ export default {
 
     // In dev mode, call `npm run start` once
     // the bundle has been generated
-    !production && serve(),
+    serve(),
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
