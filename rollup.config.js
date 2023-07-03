@@ -49,7 +49,7 @@ function serve() {
 export default {
   input: "src/main.js",
   output: {
-    sourcemap: true,
+    sourcemap: !production,
     format: "iife",
     name: "app",
     file: "build/bundle." + hash + ".js",
@@ -68,13 +68,13 @@ export default {
       },
     }),
 
-    // production && gzipPlugin(),
-    // production &&
-    //   gzipPlugin({
-    //     customCompression: (content) =>
-    //       brotliCompressSync(Buffer.from(content)),
-    //     fileName: ".br",
-    //   }),
+    production && gzipPlugin(),
+    production &&
+      gzipPlugin({
+        customCompression: (content) =>
+          brotliCompressSync(Buffer.from(content)),
+        fileName: ".br",
+      }),
 
     // we'll extract any component CSS out into
     // a separate file - better for performance
@@ -127,7 +127,7 @@ export default {
   watch: {
     clearScreen: false,
     chokidar: {
-      usePolling: false,
+      usePolling: true,
     },
   },
 };
